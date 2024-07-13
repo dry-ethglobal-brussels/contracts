@@ -212,6 +212,13 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
         return (config.ownersMerkleRoot, config.threshold, config.enabled);
     }
 
+    function getCurrentApprovalCount(
+        address account,
+        bytes32 execHash
+    ) external view returns (uint) {
+        return executions[account][execHash].approvalCount;
+    }
+
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                         METADATA                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
