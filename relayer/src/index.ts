@@ -27,8 +27,7 @@ app.post("/sign", async (req, res) => {
 	console.log("proof: ", proof);
 
 	const execHash = await getExecHash(account, to, value, data);
-	// const isExecutable = await isRequestExecutable(account, execHash);
-	const isExecutable = true;
+	const isExecutable = await isRequestExecutable(account, execHash);
 
 	if (isExecutable) {
 		// put pending proofs into array and reconstruct data to broadcast

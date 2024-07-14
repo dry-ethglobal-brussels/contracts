@@ -6,7 +6,7 @@ safe proxy : [0x4d8152386Ce4aC935d8Cfed93Ae06077025eAd9E](https://sepolia.ethers
 
 | network                                   | verifier                                   | module                                     |
 | ----------------------------------------- | ------------------------------------------ | ------------------------------------------ |
-| [sepolia](https://sepolia.etherscan.io/)  | 0x91cf2e8b57790b6a6533f47df5323db7c4dc98a9 | 0x082964A9C93d8261e7a34cEfAA11d0FdA0fedC15 |
+| [sepolia](https://sepolia.etherscan.io/)  | 0x49118cD82280580b074b8d961a3243E03Dc42f15 | 0x1106BfA02614A4D9a514a545d3Aa7E5fd3Dbc9F4 |
 | [polygon](https://amoy.polygonscan.com/)  | 0xd32204301d34bbc6528c61ac020f4beb4c079fce | 0x5dceacfc4ff52849e1ebc5fb5162e09162b26bc3 |
 | [base](https://sepolia.basescan.org/)     | 0x5dceacfc4ff52849e1ebc5fb5162e09162b26bc3 | 0xb60d7f7ec0a92da8deb34e8255c31ace45faedf4 |
 | [arbitrum](https://sepolia.arbiscan.io/)  | 0xd32204301d34bbc6528c61ac020f4beb4c079fce | 0x5dceacfc4ff52849e1ebc5fb5162e09162b26bc3 |
@@ -40,3 +40,5 @@ deploy contracts and install modules
 ts-node scripts/deployModule.ts
 ts-node scripts/installModule.ts
 ```
+
+for running relayer server, refer to doc in `relayer/`

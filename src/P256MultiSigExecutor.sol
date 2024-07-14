@@ -45,7 +45,6 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
         bytes32 ownersMerkleRoot;
         uint threshold;
         bool enabled;
-        // string credentialId
     }
 
     /**
@@ -133,15 +132,11 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
         }
 
         // TODO: bytes32 message = construct msg here...
-        // keccak256(account, target, value, calldata, chainid);
-        // bytes32 execHash = keccak256(
-        //     abi.encodePacked(account, target, value, callData, block.chainid)
-        // );
         bytes32 execHash = keccak256(
             abi.encode(account, target, value, callData, block.chainid)
         );
 
-        //  check verify proof
+        // check verify proof
         // skip execution if threshold not met
         if (_verifyProof(account, execHash, proofData)) {
             _execute({
@@ -166,11 +161,6 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
         bytes memory proofData
     ) internal returns (bool) {
         bytes[] memory proofs = abi.decode(proofData, (bytes[]));
-
-        // bytes32[] memory publicInputs = new bytes32[](2);
-        // // publicInputs[0] = execHash;
-        // publicInputs[0] = sha256(abi.encodePacked(execHash));
-        // publicInputs[1] = multisigConfigs[account].ownersMerkleRoot;
 
         bytes32[] memory publicInputs = new bytes32[](64);
         publicInputs = expandTwoBytes32(

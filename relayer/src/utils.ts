@@ -61,28 +61,26 @@ export const executeFromValidator = async (
 	proofs: string[]
 ): Promise<ethers.TransactionReceipt> => {
 	const _proofs = proofs.map((proof) => "0x" + proof);
-
-	console.log("proofs before	 encoding ", proofs);
 	const encoder = new ethers.AbiCoder();
 	const proofData = encoder.encode(["bytes[]"], [_proofs]);
 	console.log("proofData: ", proofData);
 
-	const config = await p256MultiSigExecutor.getMultisigConfig(account);
-	console.log("config: ", config);
-	const execHash = ethers.keccak256(
-		abiCoder.encode(
-			["address", "address", "uint256", "bytes", "uint256"],
-			[account, txData.to, BigInt(txData.value), txData.data, "11155111"]
-		)
-	);
-	console.log("execHash: ", execHash);
-	const root = config[0];
-	console.log("root: ", root);
-	const publicInputs = expandTwoBytes32(ethers.sha256(execHash), root);
-	console.log("publicInputs: ", publicInputs);
+	// const config = await p256MultiSigExecutor.getMultisigConfig(account);
+	// console.log("config: ", config);
+	// const execHash = ethers.keccak256(
+	// 	abiCoder.encode(
+	// 		["address", "address", "uint256", "bytes", "uint256"],
+	// 		[account, txData.to, BigInt(txData.value), txData.data, "11155111"]
+	// 	)
+	// );
+	// console.log("execHash: ", execHash);
+	// const root = config[0];
+	// console.log("root: ", root);
+	// const publicInputs = expandTwoBytes32(ethers.sha256(execHash), root);
+	// console.log("publicInputs: ", publicInputs);
 
-	const ret = await ultraVerifier.verify("0x" + proofs[0], publicInputs);
-	console.log("ret: ", ret);
+	// const ret = await ultraVerifier.verify("0x" + proofs[0], publicInputs);
+	// console.log("ret: ", ret);
 
 	const tx = await p256MultiSigExecutor.execute(
 		account,
@@ -91,7 +89,7 @@ export const executeFromValidator = async (
 		txData.data,
 		proofData,
 		{
-			gasLimit: "1100000",
+			gasLimit: "800000",
 		}
 	);
 
