@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@openzeppelin/contracts-upgradeable": "v5.0.1",
+        "@rhinestone/module-sdk": "^0.1.7",
         "@rhinestone/modulekit": "github:rhinestonewtf/modulekit",
         "@types/chai": "^4.2.0",
         "@types/circomlibjs": "^0.1.6",
@@ -32,10 +33,12 @@
         "erc7579-implementation": "https://github.com/erc7579/erc7579-implementation.git",
         "ethers": "^6.4.0",
         "pako": "^2.1.0",
+        "permissionless": "^0.1.39",
         "solidity-stringutils": "https://github.com/Arachnid/solidity-stringutils.git",
         "ts-node": ">=8.0.0",
         "typechain": "^8.1.0",
-        "typescript": "^5.4.3"
+        "typescript": "^5.4.3",
+        "viem": "^2.17.3"
     },
     "files": [
         "src",

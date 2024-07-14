@@ -78,7 +78,7 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
      *
      * @param data encoded data for recovery configuration
      */
-    function onInstall(bytes calldata data) external {
+    function onInstall(bytes calldata data) external override {
         if (data.length == 0) revert InvalidOnInstallData();
         address sender = msg.sender;
         (
@@ -98,8 +98,9 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
      * Handles the uninstallation of the module and clears the recovery configuration
      * @dev the data parameter is not used
      */
-    function onUninstall(bytes calldata /* data */) external {
-        multisigConfigs[msg.sender] = MultisigConfig(bytes32(0), 0, false);
+    function onUninstall(bytes calldata /* data */) external override {
+        // multisigConfigs[msg.sender] = MultisigConfig(bytes32(0), 0, false);
+        delete multisigConfigs[msg.sender];
     }
 
     /**
@@ -107,7 +108,7 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
      * @param smartAccount The smart account to check
      * @return true if the module is initialized, false otherwise
      */
-    function isInitialized(address smartAccount) external view returns (bool) {
+    function isInitialized(address smartAccount) public view returns (bool) {
         return multisigConfigs[smartAccount].enabled;
     }
 

@@ -13,16 +13,16 @@ contract DeployModule is Script {
     uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
 
     Verifier verifier;
-    P256MultiSigExecutor p256Validator;
+    P256MultiSigExecutor p256MultisigExecutor;
 
     function run() external {
         vm.startBroadcast(deployerPrivateKey);
 
         verifier = new Verifier();
-        p256Validator = new P256MultiSigExecutor(address(verifier));
+        p256MultisigExecutor = new P256MultiSigExecutor(address(verifier));
 
         console2.logAddress(address(verifier));
-        console2.logAddress(address(p256Validator));
+        console2.logAddress(address(p256MultisigExecutor));
 
         vm.stopBroadcast();
     }

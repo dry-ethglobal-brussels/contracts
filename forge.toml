@@ -17,6 +17,11 @@ ignored_warnings_from = [
 
 [rpc_endpoints]
 sepolia = "${SEPOLIA_RPC_URL}"
+amoy = "${AMOY_RPC_URL}"
+scroll = "${SCROLL_RPC_URL}"
+linea = "${LINEA_RPC_URL}"
+celo = "${CELO_RPC_URL}"
+chiado = "${GNOSIS_RPC_URL}"
 
 # [etherscan]
 # sepolia = { key = "${BASE_SCAN_API_KEY}" }
