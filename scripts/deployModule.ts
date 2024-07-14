@@ -15,10 +15,10 @@ dotenv.config();
 
 const NETWORKS = ["sepolia", "polygon", "base", "arbitrum", "scroll_alpha"];
 const RPC_URLS = [
-	// process.env.SEPOLIA_RPC_URL as string,
-	// process.env.POLYGON_RPC_URL as string,
-	// process.env.BASE_RPC_URL as string,
-	// process.env.ARBITRUM_RPC_URL as string,
+	process.env.SEPOLIA_RPC_URL as string,
+	process.env.POLYGON_RPC_URL as string,
+	process.env.BASE_RPC_URL as string,
+	process.env.ARBITRUM_RPC_URL as string,
 	"https://sepolia-rpc.scroll.io",
 ];
 

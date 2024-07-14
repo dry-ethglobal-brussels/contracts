@@ -5,7 +5,7 @@ import {
 } from "permissionless";
 import { signerToSafeSmartAccount } from "permissionless/accounts";
 import { createPimlicoBundlerClient } from "permissionless/clients/pimlico";
-import { PublicClient, createPublicClient, encodePacked, http } from "viem";
+import { PublicClient, createPublicClient, http } from "viem";
 import { sepolia } from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
 import { erc7579Actions } from "permissionless/actions/erc7579";
@@ -13,6 +13,8 @@ import { pimlicoBundlerActions } from "permissionless/actions/pimlico";
 import * as dotenv from "dotenv";
 import { ethers } from "ethers";
 dotenv.config();
+
+// ts-node scripts/installModule.ts
 
 export const publicClient: PublicClient = createPublicClient({
 	transport: http("https://rpc.ankr.com/eth_sepolia"),
@@ -29,7 +31,7 @@ export const pimlicoBundlerClient = createPimlicoBundlerClient({
 	.extend(pimlicoBundlerActions(ENTRYPOINT_ADDRESS_V07));
 
 const signer = privateKeyToAccount(process.env.PRIVATE_KEY as `0x${string}`);
-const executorAddress = "0x082964A9C93d8261e7a34cEfAA11d0FdA0fedC15";
+const executorAddress = "0x1106BfA02614A4D9a514a545d3Aa7E5fd3Dbc9F4";
 
 async function main() {
 	console.log("signer: ", signer.address);
@@ -57,7 +59,7 @@ async function main() {
 		["bytes", "bytes32", "uint256"],
 		[
 			"0x00",
-			"0x15c8b2dc36f64e3ad22a0febb4f662732f40f3307ae6a151fcd49a9511ccf21a",
+			"0x5ea6d43189bcbbddec86aea7fa9b2dcbf83d7bfe550e85ec790359cdbfaff526",
 			1n,
 		]
 	);

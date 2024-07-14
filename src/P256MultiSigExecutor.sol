@@ -5,7 +5,8 @@ import {ERC7579ExecutorBase} from "@rhinestone/modulekit/src/Modules.sol";
 import {IERC7579Account} from "erc7579/interfaces/IERC7579Account.sol";
 import {IModule} from "erc7579/interfaces/IERC7579Module.sol";
 import {IP256MultiSigExecutor} from "./interfaces/IP256MultiSigExecutor.sol";
-import {Verifier} from "./Verifier.sol";
+// import {Verifier} from "./Verifier.sol";
+import {UltraVerifier as Verifier} from "./plonk_vk.sol";
 
 import {console2} from "forge-std/console2.sol";
 
@@ -133,8 +134,11 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
 
         // TODO: bytes32 message = construct msg here...
         // keccak256(account, target, value, calldata, chainid);
+        // bytes32 execHash = keccak256(
+        //     abi.encodePacked(account, target, value, callData, block.chainid)
+        // );
         bytes32 execHash = keccak256(
-            abi.encodePacked(account, target, value, callData, block.chainid)
+            abi.encode(account, target, value, callData, block.chainid)
         );
 
         //  check verify proof
@@ -163,9 +167,16 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
     ) internal returns (bool) {
         bytes[] memory proofs = abi.decode(proofData, (bytes[]));
 
-        bytes32[] memory publicInputs = new bytes32[](2);
-        publicInputs[0] = execHash;
-        publicInputs[1] = multisigConfigs[account].ownersMerkleRoot;
+        // bytes32[] memory publicInputs = new bytes32[](2);
+        // // publicInputs[0] = execHash;
+        // publicInputs[0] = sha256(abi.encodePacked(execHash));
+        // publicInputs[1] = multisigConfigs[account].ownersMerkleRoot;
+
+        bytes32[] memory publicInputs = new bytes32[](64);
+        publicInputs = expandTwoBytes32(
+            sha256(abi.encodePacked(execHash)),
+            multisigConfigs[account].ownersMerkleRoot
+        );
 
         for (uint256 i = 0; i < proofs.length; i++) {
             bytes32 nullifier = keccak256(
@@ -185,6 +196,22 @@ contract P256MultiSigExecutor is ERC7579ExecutorBase, IP256MultiSigExecutor {
         return
             executions[account][execHash].approvalCount >=
             multisigConfigs[account].threshold;
+    }
+
+    function expandTwoBytes32(
+        bytes32 data1,
+        bytes32 data2
+    ) public pure returns (bytes32[] memory) {
+        bytes32[] memory expanded = new bytes32[](64);
+        for (uint256 i = 0; i < 32; i++) {
+            // Process first bytes32
+            bytes32 temp1 = bytes32(uint256(uint8(data1[i])));
+            expanded[i] = temp1;
+            // Process second bytes32
+            bytes32 temp2 = bytes32(uint256(uint8(data2[i])));
+            expanded[i + 32] = temp2;
+        }
+        return expanded;
     }
 
     function changeMultisigConfig(

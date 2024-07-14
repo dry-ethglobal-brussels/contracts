@@ -1,6 +1,8 @@
 ## ERC4337 P256-Multisig module
 
-### deployed contracts onn testnets
+### deployed contracts on testnets
+
+safe proxy : [0x4d8152386Ce4aC935d8Cfed93Ae06077025eAd9E](https://sepolia.etherscan.io/address/0x4d8152386ce4ac935d8cfed93ae06077025ead9e#code)
 
 | network                                   | verifier                                   | module                                     |
 | ----------------------------------------- | ------------------------------------------ | ------------------------------------------ |

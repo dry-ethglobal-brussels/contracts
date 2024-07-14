@@ -19,23 +19,28 @@ app.post("/sign", async (req, res) => {
 		proof,
 		txData: { to, value, data },
 	} = req.body;
+	console.log("account: ", account);
+	console.log("signer: ", signer);
+	console.log("to: ", to);
+	console.log("value: ", value);
+	console.log("data: ", data);
+	console.log("proof: ", proof);
 
 	const execHash = await getExecHash(account, to, value, data);
-	const isExecutable = await isRequestExecutable(account, execHash);
-	// const isExecutable = false;
+	// const isExecutable = await isRequestExecutable(account, execHash);
+	const isExecutable = true;
 
 	if (isExecutable) {
 		// put pending proofs into array and reconstruct data to broadcast
 		const signData = await getSignData(account, execHash);
-		console.log(signData);
+		console.log("signData: ", signData);
 		let proofArray: string[] = [];
 		if (signData) {
 			let { proofs } = signData;
-			proofArray = proofs;
-			console.log(proofs);
-			proofs.push(proof);
-			console.log(proofs);
+			proofArray.push(...proofs);
 		}
+		proofArray.push(proof);
+
 		const tx = {
 			to,
 			value,
@@ -43,8 +48,9 @@ app.post("/sign", async (req, res) => {
 		};
 
 		try {
-			console.log("executeFromValidator");
+			console.log("executeFromValidator...");
 			const response = await executeFromValidator(account, tx, proofArray);
+			console.log("response: ", response);
 			res.send({ success: true, transactionHash: response.hash });
 		} catch (error: any) {
 			console.error("Error sending transaction:", error);

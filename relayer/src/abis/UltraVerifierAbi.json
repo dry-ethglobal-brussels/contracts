@@ -1,0 +1,95 @@
+[
+  {
+    "type": "function",
+    "name": "getVerificationKeyHash",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "verify",
+    "inputs": [
+      {
+        "name": "_proof",
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "_publicInputs",
+        "type": "bytes32[]",
+        "internalType": "bytes32[]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "error",
+    "name": "INVALID_VERIFICATION_KEY",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MOD_EXP_FAILURE",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "OPENING_COMMITMENT_FAILED",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PAIRING_FAILED",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PAIRING_PREAMBLE_FAILED",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "POINT_NOT_ON_CURVE",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PUBLIC_INPUT_COUNT_INVALID",
+    "inputs": [
+      {
+        "name": "expected",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "actual",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "PUBLIC_INPUT_GE_P",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PUBLIC_INPUT_INVALID_BN128_G1_POINT",
+    "inputs": []
+  }
+]
